@@ -6,7 +6,7 @@ import App from './App';
 
 const mount = (el, {onNavigate, defaultHistory, initialPath}) => {
   const history = defaultHistory || createMemoryHistory({
-    initialEntries: [initialPath],
+    initialEntries: [initialPath]
   });
   if (onNavigate) {
     history.listen(onNavigate);
@@ -16,6 +16,7 @@ const mount = (el, {onNavigate, defaultHistory, initialPath}) => {
 
   return {
     onParentNavigate(location) {
+      console.log(history.location.pathname)
       if(history.pathname !== location.pathname) {
         history.push(location.pathname);
       }
@@ -24,7 +25,7 @@ const mount = (el, {onNavigate, defaultHistory, initialPath}) => {
 };
 
 if (process.env.NODE_ENV === "development") {
-  const el = document.querySelector("#_marketing-dev-root");
+  const el = document.querySelector("#_auth-dev-root");
   if (el) {
     mount(el, {defaultHistory: createBrowserHistory()});
   }
